@@ -10,7 +10,7 @@ fun main() {
             when (match.value) {
                 "do()" -> enabled = true
                 "don't()" -> enabled = false
-                else -> if (enabled && match.value.startsWith("mul(")) {
+                else -> if (enabled) {
                     val (x, y) = match.value.removePrefix("mul(")
                         .removeSuffix(")")
                         .split(',')
