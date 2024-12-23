@@ -11,6 +11,6 @@ part1 = sum(
 print(part1)
 part2 = max(
     (','.join(sorted(clique)) for clique in cliques),
-    key=lambda clique: len(clique)
+    key=len
 )
 print(part2)
