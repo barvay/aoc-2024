@@ -1,11 +1,10 @@
 from utils import *
 
 g = defaultdict(set)
-with open("input.txt") as f:
-    for line in f:
-        u, v = line.strip().split('-')
-        g[u].add(v)
-        g[v].add(u)
+for line in open("input.txt"):
+    u, v = line.strip().split('-')
+    g[u].add(v)
+    g[v].add(u)
 
 part1 = set()
 for u in g:
@@ -16,14 +15,14 @@ for u in g:
 print(len(part1))
 
 
-def bron_kerbosch(r, p, x, g):
+def bron_kerbosch(r, p, x):
     if not p and not x:
         yield r
     else:
         for v in p.copy():
-            yield from bron_kerbosch(r | {v}, p & g[v], x & g[v], g)
+            yield from bron_kerbosch(r | {v}, p & g[v], x & g[v])
             p.remove(v)
             x.add(v)
 
 
-print(max((','.join(sorted(c)) for c in bron_kerbosch(set(), set(g.keys()), set(), g)), key=len))
+print(max((','.join(sorted(c)) for c in bron_kerbosch(set(), set(g), set())), key=len))
